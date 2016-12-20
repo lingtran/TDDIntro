@@ -1,5 +1,4 @@
 package com.thoughtworks.tddintro.exercises.factorial;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -40,7 +39,6 @@ public class FactorialTests {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    @Ignore // Remove each @Ignore to allow the test to run
     public void shouldThrowIllegalArgumentExceptionWhenNumberIsNegative(){
         factorial.compute(-1);
     }
