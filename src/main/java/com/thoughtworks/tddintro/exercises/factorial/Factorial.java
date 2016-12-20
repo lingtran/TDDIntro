@@ -1,11 +1,17 @@
 package com.thoughtworks.tddintro.exercises.factorial;
 
 public class Factorial {
+
     public Integer compute(int i) {
+        int factorial;
+
         if(i == 0) {
             return 1;
-        } else {
-            return i;
         }
+
+        factorial = compute(i-1) * i;
+
+        return factorial;
+
     }
 }
