@@ -7,6 +7,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class AccountTests {
     private Account account;
@@ -25,6 +26,7 @@ public class AccountTests {
     @Test
     public void shouldIncreaseMyBalanceWhenIDepositMoney(){
         setUpInitialBalance(100);
+        
         Integer result = account.deposit(50);
 
         assertThat(result, is(150));
@@ -49,5 +51,6 @@ public class AccountTests {
 
         assertThat(result, is(50));
         assertEquals(result, initialBalance);
+        assertFalse(result < initialBalance);
     }
 }
