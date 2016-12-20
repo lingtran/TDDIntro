@@ -1,24 +1,56 @@
 package com.thoughtworks.tddintro.exercises.accountbalance;
 
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 public class AccountTests {
+    private Account account;
+    private Integer initialBalance;
+
+    @Before
+    public void setUp() throws Exception {
+        account = new Account();
+    }
+
+    public void setUpInitialBalance(int amount) {
+        account.setBalance(amount);
+        initialBalance = account.getBalance();
+    }
+
     @Test
-    @Ignore  // Remove each @Ignore and implement test
     public void shouldIncreaseMyBalanceWhenIDepositMoney(){
-        Account account = new Account();
+        setUpInitialBalance(100);
+        
+        Integer result = account.deposit(50);
+
+        assertThat(result, is(150));
+        assertTrue(result > initialBalance);
     }
 
     @Test
-    @Ignore  // Remove each @Ignore and implement test
     public void shouldDecreaseMyBalanceWhenIWithdrawMoney(){
+        setUpInitialBalance(100);
 
+        Integer result = account.withdraw(50);
+
+        assertThat(result, is(50));
+        assertTrue(result < initialBalance);
     }
 
     @Test
-    @Ignore  // Remove each @Ignore and implement test
     public void shouldNotDecreaseMyBalanceWhenIWithdrawMoneyAndDoNotHaveEnoughToCoverTheWithdrawal(){
+        setUpInitialBalance(50);
 
+        Integer result = account.withdraw(100);
+
+        assertThat(result, is(50));
+        assertEquals(result, initialBalance);
+        assertFalse(result < initialBalance);
     }
 }
