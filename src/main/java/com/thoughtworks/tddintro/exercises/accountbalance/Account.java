@@ -8,14 +8,18 @@ public class Account {
     }
 
     public int getBalance() {
-        return balance;
+        return this.balance;
     }
 
-    public void deposit(int amount) {
-        this.balance += amount;
+    public int deposit(int amount) {
+        return this.balance += amount;
     }
 
-    public void withdraw(int amount) {
-        this.balance -= amount;
+    public int withdraw(int amount) {
+        if(amount > this.balance) {
+            return this.balance;
+        } else {
+            return this.balance -= amount;
+        }
     }
 }

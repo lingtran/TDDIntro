@@ -1,12 +1,12 @@
 package com.thoughtworks.tddintro.exercises.accountbalance;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class AccountTests {
     private Account account;
@@ -21,8 +21,7 @@ public class AccountTests {
         account.setBalance(100);
         Integer initialBalance = account.getBalance();
 
-        account.deposit(50);
-        Integer result = account.getBalance();
+        Integer result = account.deposit(50);
 
         assertThat(result, is(150));
         assertTrue(result > initialBalance);
@@ -33,16 +32,20 @@ public class AccountTests {
         account.setBalance(100);
         Integer initialBalance = account.getBalance();
 
-        account.withdraw(50);
-        Integer result = account.getBalance();
+        Integer result = account.withdraw(50);
 
         assertThat(result, is(50));
         assertTrue(result < initialBalance);
     }
 
     @Test
-    @Ignore  // Remove each @Ignore and implement test
     public void shouldNotDecreaseMyBalanceWhenIWithdrawMoneyAndDoNotHaveEnoughToCoverTheWithdrawal(){
+        account.setBalance(50);
+        Integer initialBalance = account.getBalance();
 
+        Integer result = account.withdraw(100);
+
+        assertThat(result, is(50));
+        assertEquals(result, initialBalance);
     }
 }
