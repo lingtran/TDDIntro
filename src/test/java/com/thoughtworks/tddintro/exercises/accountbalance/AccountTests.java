@@ -10,17 +10,21 @@ import static org.junit.Assert.assertEquals;
 
 public class AccountTests {
     private Account account;
+    private Integer initialBalance;
 
     @Before
     public void setUp() throws Exception {
         account = new Account();
     }
 
+    public void setUpInitialBalance(int amount) {
+        account.setBalance(amount);
+        initialBalance = account.getBalance();
+    }
+
     @Test
     public void shouldIncreaseMyBalanceWhenIDepositMoney(){
-        account.setBalance(100);
-        Integer initialBalance = account.getBalance();
-
+        setUpInitialBalance(100);
         Integer result = account.deposit(50);
 
         assertThat(result, is(150));
@@ -29,8 +33,7 @@ public class AccountTests {
 
     @Test
     public void shouldDecreaseMyBalanceWhenIWithdrawMoney(){
-        account.setBalance(100);
-        Integer initialBalance = account.getBalance();
+        setUpInitialBalance(100);
 
         Integer result = account.withdraw(50);
 
@@ -40,8 +43,7 @@ public class AccountTests {
 
     @Test
     public void shouldNotDecreaseMyBalanceWhenIWithdrawMoneyAndDoNotHaveEnoughToCoverTheWithdrawal(){
-        account.setBalance(50);
-        Integer initialBalance = account.getBalance();
+        setUpInitialBalance(50);
 
         Integer result = account.withdraw(100);
 
