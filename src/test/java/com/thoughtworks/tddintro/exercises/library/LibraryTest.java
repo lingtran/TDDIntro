@@ -1,7 +1,6 @@
 package com.thoughtworks.tddintro.exercises.library;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -13,9 +12,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class LibraryTest {
     private List<String> books;
@@ -71,11 +68,10 @@ public class LibraryTest {
     }
 
     @Test
-    @Ignore // Remove each @Ignore and implement test
     public void shouldDeleteBookFromCollectionWhenRemovedByUser() throws IOException {
-        // Add when/thenReturn here
-
         books.add("The Two Towers");
+
+        when(bufferedReader.readLine()).thenReturn("The Two Towers");
         library.removeBook();
 
         assertThat(books, not(hasItems("The Two Towers")));
