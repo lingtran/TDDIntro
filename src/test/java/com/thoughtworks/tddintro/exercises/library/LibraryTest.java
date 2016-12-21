@@ -1,7 +1,6 @@
 package com.thoughtworks.tddintro.exercises.library;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -13,15 +12,15 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class LibraryTest {
     private List<String> books;
     private PrintStream printStream;
     private Library library;
     private BufferedReader bufferedReader;
+    private String titleOne;
+    private String titleTwo;
 
     @Before
     public void setUp() throws Exception {
@@ -29,30 +28,36 @@ public class LibraryTest {
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
         library = new Library(books, printStream, bufferedReader);
+        titleOne = "The Fellowship of the Ring";
+        titleTwo = "The Return of the King";
     }
 
     @Test
-    @Ignore // Remove each @Ignore and implement test
     public void shouldPrintBookTitleWhenThereIsOneBook() {
-        String title = "Book Title";
-        books.add(title);
+        books.add(titleOne);
 
         library.listBooks();
 
-        // add a verify statement here that shows that the book title was printed by the printStream
+        verify(printStream).println(titleOne + "\n");
     }
 
     @Test
-    @Ignore // Remove each @Ignore and implement test
     public void shouldPrintNothingWhenThereAreNoBooks() {
+        library.listBooks();
 
-        // implement me
+        verify(printStream).println("");
     }
 
     @Test
-    @Ignore // Remove each @Ignore and implement test
     public void shouldPrintBothBookTitlesWhenThereAreTwoBooks() throws IOException {
-        // implement me
+        books.add(titleOne);
+        books.add(titleTwo);
+
+        library.listBooks();
+
+        String result = String.format("%s\n%s\n", titleOne, titleTwo);
+
+        verify(printStream).println(result);
     }
 
     @Test
@@ -63,13 +68,15 @@ public class LibraryTest {
     }
 
     @Test
-    @Ignore // Remove each @Ignore and implement test
     public void shouldDeleteBookFromCollectionWhenRemovedByUser() throws IOException {
-        // Add when/thenReturn here
+        String titleThree = "The Two Towers";
+        books.add(titleThree);
 
-        books.add("The Two Towers");
+        assertThat(books, hasItems(titleThree));
+
+        when(bufferedReader.readLine()).thenReturn(titleThree);
         library.removeBook();
 
-        assertThat(books, not(hasItems("The Two Towers")));
+        assertThat(books, not(hasItems(titleThree)));
     }
 }
