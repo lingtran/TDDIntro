@@ -14,8 +14,8 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 public class LibraryTest {
     private List<String> books;
@@ -32,7 +32,6 @@ public class LibraryTest {
     }
 
     @Test
-    @Ignore // Remove each @Ignore and implement test
     public void shouldPrintBookTitleWhenThereIsOneBook() {
         String title = "Book Title";
         books.add(title);
@@ -40,6 +39,7 @@ public class LibraryTest {
         library.listBooks();
 
         // add a verify statement here that shows that the book title was printed by the printStream
+        verify(printStream).println(title + "\n");
     }
 
     @Test
