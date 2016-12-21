@@ -69,11 +69,14 @@ public class LibraryTest {
 
     @Test
     public void shouldDeleteBookFromCollectionWhenRemovedByUser() throws IOException {
-        books.add("The Two Towers");
+        String titleThree = "The Two Towers";
+        books.add(titleThree);
 
-        when(bufferedReader.readLine()).thenReturn("The Two Towers");
+        assertThat(books, hasItems(titleThree));
+
+        when(bufferedReader.readLine()).thenReturn(titleThree);
         library.removeBook();
 
-        assertThat(books, not(hasItems("The Two Towers")));
+        assertThat(books, not(hasItems(titleThree)));
     }
 }
