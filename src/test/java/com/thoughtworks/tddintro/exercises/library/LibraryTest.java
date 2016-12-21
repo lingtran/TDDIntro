@@ -22,6 +22,8 @@ public class LibraryTest {
     private PrintStream printStream;
     private Library library;
     private BufferedReader bufferedReader;
+    private String titleOne;
+    private String titleTwo;
 
     @Before
     public void setUp() throws Exception {
@@ -29,17 +31,17 @@ public class LibraryTest {
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
         library = new Library(books, printStream, bufferedReader);
+        titleOne = "The Fellowship of the Ring";
+        titleTwo = "The Return of the King";
     }
 
     @Test
     public void shouldPrintBookTitleWhenThereIsOneBook() {
-        String title = "Book Title";
-        books.add(title);
+        books.add(titleOne);
 
         library.listBooks();
 
-        // add a verify statement here that shows that the book title was printed by the printStream
-        verify(printStream).println(title + "\n");
+        verify(printStream).println(titleOne + "\n");
     }
 
     @Test
@@ -51,9 +53,6 @@ public class LibraryTest {
 
     @Test
     public void shouldPrintBothBookTitlesWhenThereAreTwoBooks() throws IOException {
-        String titleOne = "The Fellowship of the Ring";
-        String titleTwo = "The Return of the King";
-
         books.add(titleOne);
         books.add(titleTwo);
 
