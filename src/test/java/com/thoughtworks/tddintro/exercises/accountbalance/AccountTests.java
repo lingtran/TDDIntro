@@ -4,14 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class AccountTests {
     private Account account;
-    private Integer initialBalance;
 
     @Before
     public void setUp() throws Exception {
@@ -20,37 +16,38 @@ public class AccountTests {
 
     public void setUpInitialBalance(int amount) {
         account.setBalance(amount);
-        initialBalance = account.getBalance();
     }
 
     @Test
     public void shouldIncreaseMyBalanceWhenIDepositMoney(){
         setUpInitialBalance(100);
-        
-        Integer result = account.deposit(50);
+
+        account.deposit(50);
+
+        Integer result = account.getBalance();
 
         assertThat(result, is(150));
-        assertTrue(result > initialBalance);
     }
 
     @Test
     public void shouldDecreaseMyBalanceWhenIWithdrawMoney(){
         setUpInitialBalance(100);
 
-        Integer result = account.withdraw(50);
+        account.withdraw(50);
+
+        Integer result = account.getBalance();
 
         assertThat(result, is(50));
-        assertTrue(result < initialBalance);
     }
 
     @Test
     public void shouldNotDecreaseMyBalanceWhenIWithdrawMoneyAndDoNotHaveEnoughToCoverTheWithdrawal(){
         setUpInitialBalance(50);
 
-        Integer result = account.withdraw(100);
+        account.withdraw(100);
+
+        Integer result = account.getBalance();
 
         assertThat(result, is(50));
-        assertEquals(result, initialBalance);
-        assertFalse(result < initialBalance);
     }
 }
