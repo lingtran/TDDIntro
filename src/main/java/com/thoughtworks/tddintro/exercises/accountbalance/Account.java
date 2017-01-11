@@ -11,15 +11,13 @@ public class Account {
         return this.balance;
     }
 
-    public int deposit(int amount) {
-        return this.balance += amount;
+    public void deposit(int amount) {
+        this.balance += amount;
     }
 
-    public int withdraw(int amount) {
-        if(amount > this.balance) {
-            return this.balance;
-        } else {
-            return this.balance -= amount;
+    public void withdraw(int amount) {
+        if(amount < this.balance) {
+            this.balance -= amount;
         }
     }
 }
