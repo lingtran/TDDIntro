@@ -1,21 +1,15 @@
 package com.thoughtworks.tddintro.exercises.accountbalance;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class AccountTests {
     private Account account;
 
-    @Before
-    public void setUp() throws Exception {
-        account = new Account();
-    }
-
     public void setUpInitialBalance(int amount) {
-        account.setBalance(amount);
+        account = new Account(amount);
     }
 
     @Test
