@@ -4,10 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class AccountTests {
     private Account account;
@@ -30,7 +27,6 @@ public class AccountTests {
         Integer result = account.deposit(50);
 
         assertThat(result, is(150));
-        assertTrue(result > initialBalance);
     }
 
     @Test
@@ -40,7 +36,6 @@ public class AccountTests {
         Integer result = account.withdraw(50);
 
         assertThat(result, is(50));
-        assertTrue(result < initialBalance);
     }
 
     @Test
@@ -50,7 +45,5 @@ public class AccountTests {
         Integer result = account.withdraw(100);
 
         assertThat(result, is(50));
-        assertEquals(result, initialBalance);
-        assertFalse(result < initialBalance);
     }
 }
